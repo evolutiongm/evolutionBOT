@@ -1,5 +1,6 @@
 import asyncio
 import discord
+import os
 from discord.ext import commands
 
 if not discord.opus.is_loaded():
@@ -8,7 +9,7 @@ if not discord.opus.is_loaded():
     # you should replace this with the location the
     # opus library is located in and with the proper filename.
     # note that on windows this DLL is automatically provided for you
-    discord.opus.load_opus('opus')
+    discord.opus.load_opus(os.getenv("OPUS"))
 
 class VoiceEntry:
     def __init__(self, message, player):
@@ -243,4 +244,4 @@ bot.add_cog(Music(bot))
 async def on_ready():
     print('Logged in as:\n{0} (ID: {0.id})'.format(bot.user))
 
-bot.run('token')
+bot.run(os.getenv("TOKEN"))
